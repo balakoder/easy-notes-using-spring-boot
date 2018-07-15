@@ -1,0 +1,38 @@
+spring:
+  profiles: default
+  main:
+    banner-mode: "off"  
+  datasource:
+      url: jdbc:mysql://localhost:3306/notes_app?autoReconnect=true&useUnicode=true
+      username: root
+      password: root
+  jpa:
+    hibernate:
+      ddlAuto: update
+      dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+      namingStrategy: org.hibernate.cfg.EJB3NamingStrategy
+      show-sql: false 
+      hikari: 
+          connection-test-query: SELECT 1 
+          minimum-idle: 1
+          maximum-pool-size: 20
+          pool-name: EasyNotesDataPool
+          maxLifetime: 2500000
+          connectionTimeout: 20000
+          auto-commit: false       
+     
+server:
+    port: 9001
+    servlet:
+        contextPath: /my-easy-notes            
+
+logging:
+  level:
+    org.springframework.web: ERROR
+    com.bala: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n-%X{mdcData}%5p"
+
+management:
+  security:
+    enabled: false
